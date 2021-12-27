@@ -19,7 +19,7 @@ public class MyPlayerBehaviour : MonoBehaviour
     void Start()
     {
         References.thePlayer = gameObject;
-        weapons = new WeaponBehaviour[1];
+        weapons = new WeaponBehaviour[arraySize];
         for (int index = 0; index < arraySize; index++)
         {
             weapons[index] = new WeaponBehaviour();
@@ -97,7 +97,12 @@ public class MyPlayerBehaviour : MonoBehaviour
             //weapons.Add(theirWeapon);
 
             //Add it to our internal Array
-            weapons[selectedWeaponIndex] = theirWeapon;
+            if (selectedWeaponIndex < weapons.Length)
+            {
+                weapons[selectedWeaponIndex] = theirWeapon;
+                selectedWeaponIndex++;
+            }
+
             //Move it to our location
             theirWeapon.transform.position = transform.position;
             theirWeapon.transform.rotation = transform.rotation;
